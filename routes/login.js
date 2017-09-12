@@ -21,8 +21,7 @@ router.post('/', function(req, res, next) {
 			}
 		}
 		res.json(o);
-	});
+	});	
 	next();
 });
-
 module.exports = router;
