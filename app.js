@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mysql=require("mysql");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -12,7 +11,6 @@ var login = require('./routes/login');
 
 var app = express();
 app.use(express.static('public'));
-
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
