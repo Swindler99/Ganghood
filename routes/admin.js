@@ -53,7 +53,7 @@ router.get("./isexist",function(req,resp,next){
 	var data=[req.body.account];
 	adminDao.isexist(data,function(err,result){
 		var o={};
-		o.result=true==null;
+		o.result=err==null;
 		o.massage=o.result=""?"成功，可以使用":"账号已重复";
 		o.data=result;
 	});
