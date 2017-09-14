@@ -59,9 +59,5 @@ router.get("./isexist",function(req,resp,next){
 	});
 });
 
-/* GET users listing.
-router.get('/add', function(req, res, next) {
-  res.send('respond with a resource');
-});
- */
+
 module.exports = router;
