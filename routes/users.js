@@ -13,12 +13,15 @@ router.post('/add',function(req,res){
 		res.json(o);
 	});
 });
-router.post('/list',function(req,res){
-	usersDao.queryUser(function(err,result){
+router.post('/list/:page',function(req,res){
+	var page=req.params.page;
+	var params=[req.body.sex,req.body.name,req.body.leastBirthdate,req.body.mostBirthdate];
+	usersDao.queryUser(page,params,function(err,r){
 		var o={};
+		console.log(err);
 		o.result=err==null;
 		o.msg=o.result?"查询用户成功！":"查询用户失败！";
-		o.data=result;
+		o.data={data:r.res1,currentPage:page,totalNums:r.res2[0].total,totalPage:Math.ceil(r.res2[0].total/10)};
 		res.json(o);
 	});
 });
@@ -100,7 +103,7 @@ router.post('/updateDel/:id',function(req,res){
 	usersDao.updateUserDeletedTime(userID,params,function(err,result){
 		var o={};
 		o.result=err==null;
-		o.msg=o.result?"更新被举报次数成功！":"更新被举报次数失败！";
+		o.msg=o.result?"更新被删除次数成功！":"更新被删除次数失败！";
 		res.json(o);
 	});
 });
@@ -116,8 +119,17 @@ router.post('/hide/:id',function(req,res){
 		//console.log(err);
 	});
 });
+router.post('/isexist/:account',function(req,res){
+	var params=req.params.account;
+	usersDao.isexistUser(params,function(err,result){
+		var o={};
+		o.result=result=='';
+		o.msg=o.result?"可用账号!":"账号已存在！";
+		res.json(o);
+	});
+});
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.send('respond with a resource');
 });
 
