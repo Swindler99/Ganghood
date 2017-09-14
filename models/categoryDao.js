@@ -1,4 +1,4 @@
-var pool=require("./dbConnction");
+var pool=require("./dbConnection");
 
 module.exports={
 	add:function(data,callback){
@@ -38,6 +38,22 @@ module.exports={
 		})
 	},
 	query:function(data,callback){
-		var sql="select c1.id,c1.name,c2.name as category from category c1 join category c2 where c1.categoryId = c2.id";
+		var sql="select c1.id,c1.name,c2.name as category from category c1 left join category c2 on c1.categoryId = c2.id where 1=1 ";
+		if(data[0]){
+			if(data[0]==0){
+				sql+="and c1.categoryId is null";
+			}else{
+				sql+="and c1.categoryId="+data[0];
+			}
+		};
+		pool.getConnection(function(err,connection){
+			if(err){
+				console.log("连接失败！");
+			}else{
+				connection.query(sql,function(err,result){
+					callback(err,result);
+				})
+			}
+		})
 	}
 }
