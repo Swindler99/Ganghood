@@ -42,7 +42,7 @@ router.post('/add2', function(req,res,next) {
     })
     next();
 });
-//查看答案列表
+//查看答案列表]====
 router.get('/list', function(req, res,next) {
 	var data=[req.params.questionId];
     console.log(data);
@@ -54,3 +54,4 @@ router.get('/list', function(req, res,next) {
     })
     next();
 });
+module.exports=router;

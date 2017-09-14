@@ -58,25 +58,6 @@ var amswerdao ={
 		})	
 		},
 		
-		//置顶问题
-	/*	top：function(data,callback){
-			var sql="update question set id= from id=? ";
-			var sqlParams=[data.id];
-		pool.getConnection(function(err,connection){
-			if(err){
-				console.log("置顶失败!")
-			}else{
-				connection.query(sql,sqlParams,function(err,result){
-					if(err){
-						callback(err.message);
-					}else{
-						callback(result);
-					}
-				})
-			}
-		})	
-		},
-		*/
 	
 
 	}

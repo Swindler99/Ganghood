@@ -54,5 +54,4 @@ router.get('/view/:id', function(req, res,next) {
     })
     next();
 });
-
 module.exports=router;
