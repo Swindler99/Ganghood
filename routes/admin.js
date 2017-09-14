@@ -1,4 +1,4 @@
-var express = require('express');
+﻿var express = require('express');
 var router = express.Router();
 var adminDao=require("../models/adminDao");
 
@@ -71,3 +71,4 @@ module.exports = router;
 　　else
 　　　　print '不存在'
  * **/
+/**/
