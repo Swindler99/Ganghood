@@ -10,6 +10,7 @@ router.post("./add",function(req,resp,next){    // 添加管理员
 		o.result=err==null;
 		o.massage=o.result?"添加管理员成功":"添加失败";	
 		console.log(o);
+		o.data={data:result};
 		resp.json(o);
 	});
 	next();
@@ -20,7 +21,8 @@ router.post("./update",function(req,resp,next){    //修改管理员
 	adminDao.update(data,function(err,result){
 		var o={};
 		o.result=err=null;
-		o.massage=o.result?"更改管理员成功":"更改失败";
+		o.msg=o.result?"更改管理员成功":"更改失败";
+		o.data={data:result};
 		resp.json(o);
 	});
 	next();
@@ -31,8 +33,8 @@ router.post("./del",function(req,resq,next){   //删除管理员
 	adminDao.del(data,function(err,result){
 		var o={};
 		o.result=err==null;
-		o.massage=o.result?"删除成功":"删除失败";
-		o.data=result;
+		o.msg=o.result?"删除成功":"删除失败";
+		o.data={data:result};
 		resq.json(o);
 	});
 	next();
@@ -42,8 +44,8 @@ router.get("./list",function(req,resp,next){  // 查询管理员表
 	adminDao.query(function(err,result){
 		var o={};
 		o.result=err==null;
-		o.massage=o.result?"查询管理员成功":"查询失败";	
-		o.data=result;
+		o.msg=o.result?"查询管理员成功":"查询失败";	
+		o.data={data:result};
 		resp.json(o);
 	});
 	next();
@@ -54,10 +56,10 @@ router.get("./isexist",function(req,resp,next){
 	adminDao.isexist(data,function(err,result){
 		var o={};
 		o.result=err==null;
-		o.massage=o.result=""?"成功，可以使用":"账号已重复";
-		o.data=result;
+		o.msg=o.result?"成功，可以使用":"账号已重复";
+		o.data={data:result};
+		resp.json(o);
 	});
 });
-
 
 module.exports = router;
