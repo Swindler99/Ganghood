@@ -65,10 +65,3 @@ router.get('/add', function(req, res, next) {
 });
  */
 module.exports = router;
-
-/**if exists (select * from syscolumns where name='colname1' and id=object_id('数据库名.Owner.表名'))
-　　　　print '存在'
-　　else
-　　　　print '不存在'
- * **/
-/**/
