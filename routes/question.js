@@ -6,6 +6,7 @@ var questionDao=require("../models/questionDao");
 router.post('/add', function(req,res) {
     var data=[req.body.title,req.body.content,req.body.urgent,req.body.score,req.body.anonymous,req.body.userId,req.body.category];
     questionDao.add(data,function(err,result){
+    	var o={};
     	o.result=err==null;
 		o.msg=o.result?"增加问题成功!":"增加问题失败!";
 		o.data={data:result};
@@ -16,6 +17,7 @@ router.post('/add', function(req,res) {
 router.post('/del/:id', function(req, res) {
 	var data=[req.params.id];
     questionDao.del(data,function(err,result){
+    	var o={};
     	o.result=err==null;
 		o.msg=o.result?"删除问题成功!":"删除问题失败!";
 		o.data={data:result};
@@ -26,6 +28,7 @@ router.post('/del/:id', function(req, res) {
 router.post('/sup', function(req,res) {
     var data=[req.body.id,req.body.addContent];
     questionDao.supplement(data,function(err,result){
+    	var o={};
     	o.result=err==null;
 		o.msg=o.result?"补充问题成功!":"补充问题失败!";
 		o.data={data:result};
@@ -36,6 +39,7 @@ router.post('/sup', function(req,res) {
 router.get('/view/:id', function(req, res) {
 	var data=[req.params.id];
     questionDao.view(data,function(err,result){
+    	var o={};
     	o.result=err==null;
 		o.msg=o.result?"查询问题成功!":"查询问题失败!";
 		o.data={data:result};
@@ -46,6 +50,7 @@ router.get('/view/:id', function(req, res) {
 router.get('/userList/:userId', function(req, res) {
 	var data=[req.params.userId];
     questionDao.userQuery(data,function(err,result){
+    	var o={};
     	o.result=err==null;
 		o.msg=o.result?"查询成功!":"查询失败!";
 		o.data={data:result};
@@ -55,6 +60,7 @@ router.get('/userList/:userId', function(req, res) {
 //查询关注度问题列表
 router.get("/attList",function(req,res){
 	questionDao.attQuery(function(err,result){
+		var o={};
 		o.result=err==null;
 		o.msg=o.result?"查询成功!":"查询失败!";
 		o.data={data:result};
@@ -65,10 +71,34 @@ router.get("/attList",function(req,res){
 router.get('/cateList/{category}',function(req,res){
 	var data=[req.params.category];
 	questionDao.cateQuery(data,function(err,result){
+		var o={};
 		o.result=err==null;
 		o.msg=o.result?"查询成功!":"查询失败!";
 		o.data={data:result};
 		res.json(o);
 	})
-})
+});
+//置顶问题
+router.post('/top/:id',function(req,res){
+	var data=[req.params.id];
+	questionDao.top(data,function(err,result){
+		var o={};
+		o.result=err==null;
+		o.msg=o.result?"操作成功!":"操作失败!";
+		o.data={data:result};
+		res.json(o);
+	})
+});
+//举报问题
+router.post('/report/:id',function(req,res){
+	var data=[req.params.id];
+	questionDao.report(data,function(err,result){
+		var o={};
+		o.result=err==null;
+		o.msg=o.result?"操作成功!":"操作失败!";
+		o.data={data:result};
+		res.json(o);
+	})
+});
+
 module.exports=router;
