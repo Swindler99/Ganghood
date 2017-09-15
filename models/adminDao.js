@@ -80,5 +80,4 @@ var adminDao={
 			});
 		}
 }
-
 module.exports=adminDao;
