@@ -99,6 +99,5 @@ router.post('/report/:id',function(req,res){
 		o.data={data:result};
 		res.json(o);
 	})
-});
-
+})
 module.exports=router;
