@@ -3,7 +3,6 @@ var adminDao={
 		//查询数据 列表
 		query:function(callback){
 			var sql="select*from administrator ";
-			
 			pool.getConnection(function(err,connection){
 				if(err){
 					console.log("查询失败");
@@ -29,8 +28,7 @@ var adminDao={
 		},
 		//更改数据
 		update:function(data,callback){
-			var sql="update administrator set account=?,password=?,authority=? where id=?";
-		//	var upSql=[data.account,data.password,data.authority,data.id];
+			var sql="update administrator set account=?,password=? where id=?";
 			pool.getConnection(function(err,connection){
 				if(err){
 					console.log("更新失败");
@@ -44,7 +42,6 @@ var adminDao={
 		//删除数据
 		del:function(data,callback){
 			var sql="delete from administrator where id=?";
-		//	var delSql=[data.id];
 			pool.getConnection(function(err,connection){
 				if(err){
 					console.log("删除失败");
@@ -57,8 +54,7 @@ var adminDao={
 		},
 		//账号是否重复
 		isexist:function(data,callback){
-			var sql="select * from administrator where account=? ";
-		//	var reSql=[data.account];
+			var sql="select * from administrator where account=?";
 			pool.getConnection(function(err,connection){
 				if(err){
 					console.log("登录失败")
@@ -69,6 +65,19 @@ var adminDao={
 				}
 			});
 			
+		},
+		queryAdm:function(params,callback){
+			var querySql="select account from administrator where account=? and password=?"
+			pool.getConnection(function(err,connection){
+				if(err) {
+					console.log("连接失败！");
+				}
+				else{
+					connection.query(querySql,params,function(err,result){
+						callback(err,result);
+					});
+				}				
+			});
 		}
 }
 
