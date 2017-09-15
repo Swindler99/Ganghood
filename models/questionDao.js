@@ -26,8 +26,8 @@ var questiondao ={
 			}
 		})	
 		},
-	//追加问题
-	add2: function(data,callback) {
+	//补充问题
+	supplement: function(data,callback) {
 		var sql="update question set addContent=? where id=?"
 		pool.getConnection(function(err,connection){
 			if(err){
@@ -51,6 +51,45 @@ var questiondao ={
 				})
 			}
 		})	
-		},
+	},
+	//用户发布问题列表
+	userQuery：function(data,callback){
+		var sql="select * from question where userId=?";
+		pool.getConnection(function(err,connection){
+			if(err){
+				console.log("连接失败!")
+			}else{
+				connection.query(sql,data,function(err,result){
+					callback(err,result);
+				})
+			}
+		})
+	},
+	//首页问题列表
+	attQuery:function(callback){
+		var sql="select * from question where attention=1";
+		pool.getConnection(function(err,connection){
+			if(err){
+				console.log("连接失败!")
+			}else{
+				connection.query(sql,function(err,result){
+					callback(err,result);
+				})
+			}
+		})
+	},
+	//按分类查询问题列表
+	cateQuery:function(data,callback){
+		var sql="select * from question where category=?";
+		pool.getConnection(function(err,connection){
+			if(err){
+				console.log("连接失败!")
+			}else{
+				connection.query(sql,data,function(err,result){
+					callback(err,result);
+				})
+			}
+		})
 	}
+}
 module.exports=questiondao;
