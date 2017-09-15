@@ -15,31 +15,60 @@ router.post('/add', function(req,res) {
 //删除问题
 router.post('/del/:id', function(req, res) {
 	var data=[req.params.id];
-    questionDao.delete(data,function(err,result){
+    questionDao.del(data,function(err,result){
     	o.result=err==null;
 		o.msg=o.result?"删除问题成功!":"删除问题失败!";
 		o.data={data:result};
 		res.json(o);
     })
 });
-//追加问题
-router.post('/add2', function(req,res) {
+//补充问题
+router.post('/sup', function(req,res) {
     var data=[req.body.id,req.body.addContent];
-    questionDao.update(data,function(err,result){
+    questionDao.supplement(data,function(err,result){
     	o.result=err==null;
-		o.msg=o.result?"追加问题成功!":"追加问题失败!";
+		o.msg=o.result?"补充问题成功!":"补充问题失败!";
 		o.data={data:result};
 		res.json(o);
     })
 });
-//查看问题
+//查看问题详情
 router.get('/view/:id', function(req, res) {
 	var data=[req.params.id];
-    questionDao.select*from(data,function(err,result){
+    questionDao.view(data,function(err,result){
     	o.result=err==null;
 		o.msg=o.result?"查询问题成功!":"查询问题失败!";
 		o.data={data:result};
 		res.json(o);	
     })
 });
+//查询用户提问列表
+router.get('/userList/:userId', function(req, res) {
+	var data=[req.params.userId];
+    questionDao.userQuery(data,function(err,result){
+    	o.result=err==null;
+		o.msg=o.result?"查询成功!":"查询失败!";
+		o.data={data:result};
+		res.json(o);	
+    })
+});
+//查询关注度问题列表
+router.get("/attList",function(req,res){
+	questionDao.attQuery(function(err,result){
+		o.result=err==null;
+		o.msg=o.result?"查询成功!":"查询失败!";
+		o.data={data:result};
+		res.json(o);
+	})
+});
+//按类别查询问题列表
+router.get('/cateList/{category}',function(req,res){
+	var data=[req.params.category];
+	questionDao.cateQuery(data,function(err,result){
+		o.result=err==null;
+		o.msg=o.result?"查询成功!":"查询失败!";
+		o.data={data:result};
+		res.json(o);
+	})
+})
 module.exports=router;
