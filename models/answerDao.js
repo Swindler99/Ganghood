@@ -14,7 +14,7 @@ var answerdao ={
 		})	
 	},
 	//删除答案
-	del：function(data,callback){
+	del:function(data,callback){
 		var sql="delete from answer where id=? ";
 		pool.getConnection(function(err,connection){
 			if(err){
@@ -27,7 +27,7 @@ var answerdao ={
 		});	
 	},
 	//查看答案列表
-	list：function(data,callback){
+	list:function(data,callback){
 		var sql="select*from answer where questionId =? ";
 		pool.getConnection(function(err,connection){
 			if(err){
